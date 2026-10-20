@@ -1,10 +1,4 @@
-
-
-
-
-
 const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
-
 const username = loggedUser;
 const token = localStorage.getItem("osuToken");
 const topplay = JSON.parse(localStorage.getItem("topPlayData"));
@@ -12,11 +6,9 @@ const topplay = JSON.parse(localStorage.getItem("topPlayData"));
 if (loggedUser) {
   document.getElementById("loginButton").textContent = `Logged in as ${loggedUser}`;
 }
-
 else {
     window.location.href = "index.html";
 }
-
 
 
 function calcQuestLevel(experience) {
@@ -282,7 +274,7 @@ async function loadProfile() {
 
   errorBox.textContent = "";
 
-  // 1. Empty input
+ 
   if (!username) {
     errorBox.textContent = "Please enter a valid username.";
     return;
@@ -292,16 +284,16 @@ async function loadProfile() {
     loadAndRenderQuests(loggedUser);
     startQuestRefreshCountdown(loggedUser);
 
-    // 2. Fetch profile
+  
     const user = await getUserByUsername(loggedUser);
     console.log(user);  
-    // If API returns HTML instead of JSON
+ 
     if (!user || typeof user !== "object") {
       errorBox.textContent = "Unexpected response from server.";
       return;
     }
 
-    // If user not found
+
     if (user.error || user.status === 404) {
       errorBox.textContent = "User not found.";
       return;
@@ -349,7 +341,7 @@ async function loadProfile() {
   
   
   catch (err) {
-    // 5. Catch server errors, JSON errors, network errors
+
     errorBox.textContent = "Something went wrong. Please try again.";
     console.error(err);
   }
@@ -423,7 +415,7 @@ async function getToken() {
 
 
 
-// 2. define getUserByUsername SECOND
+
 async function getUserByUsername(username) {
   const token = await getToken();
 

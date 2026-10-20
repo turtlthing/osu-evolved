@@ -58,7 +58,7 @@ body {
 
 #home {
   display: flex;
-  gap: 20px;          /* space between boxes */
+  gap: 20px;         
   align-items: flex-start;
 }
 
@@ -136,7 +136,7 @@ body {
 
 #profile-container {
   display: flex;
-  gap: 20px;          /* space between boxes */
+  gap: 20px;          
   align-items: flex-start;
 }
 
@@ -144,14 +144,14 @@ body {
 #topplays-container {
   display: flex;
   margin-top: 10px;
-  gap: 20px;          /* space between boxes */
+  gap: 20px;      
   align-items: flex-start;
   width: 100%;
   background: #111;
 }
 
 #topplays{
-  width: 60%;       /* your top plays box width */
+  width: 60%;       
   max-height: fit-content;
   background: #1a1a1a;
   padding: 20px;
@@ -163,7 +163,7 @@ body {
 }
 
 #topplays_inflation{
-  width: 60%;       /* your top plays box width */
+  width: 60%;       
   max-height: fit-content;
   background: #1a1a1a;
   padding: 20px;

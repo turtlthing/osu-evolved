@@ -5,7 +5,7 @@ const loggedUser = params.get("user");
 const user = JSON.parse(localStorage.getItem("osuUser"));
 const token = localStorage.getItem("osuToken");
 
-
+// login with osu! OAuth
 document.getElementById("loginButton").addEventListener("click", () => {
   const params = new URLSearchParams({
     client_id: 65956,
@@ -32,7 +32,7 @@ async function getToken() {
   return await response.json();
 }
 
-// 2. define getUserByUsername SECOND
+// fetch user data by username
 async function getUserByUsername(username) {
   const token = await getToken();
 
@@ -52,6 +52,8 @@ async function getUserByUsername(username) {
 function accuracy_fixed(accuracy) {
   return (accuracy * 100).toFixed(2) + " %";
 }
+
+// calculate playtime 
 function wow_playtime(playtime) {
   const hours = Math.floor(playtime / 3600).toFixed(2);
   const days = (hours / 24).toFixed(2);
@@ -71,6 +73,7 @@ function wow_playtime(playtime) {
   return days + " days: " + statement;
 }
 
+// calculate join date 
 function wow_joindate(joinDate, days) {
   const join = new Date(joinDate);
   const now = new Date();
@@ -94,7 +97,7 @@ function wow_joindate(joinDate, days) {
   return diffDays + " days: " + statement;
 }
 
-// 3. search button LAST
+// search button
 document.getElementById("searchButton").addEventListener("click", async () => {
 
   const username = document.getElementById("searchInput").value.trim();
@@ -102,27 +105,27 @@ document.getElementById("searchButton").addEventListener("click", async () => {
 
 
 
-  // Clear old errors
+
   errorBox.textContent = "";
 
-  // 1. Empty input
+ 
   if (!username) {
     errorBox.textContent = "Please enter a valid username.";
     return;
   }
 
   try {
-    // 2. Fetch profile
+
     const user = await getUserByUsername(username);
     console.log("Fetched user:", user);
 
-    // If API returns HTML instead of JSON
+
     if (!user || typeof user !== "object") {
       errorBox.textContent = "Unexpected response from server.";
       return;
     }
 
-    // If user not found
+
     if (user.error || user.status === 404) {
       errorBox.textContent = "User not found.";
       return;
@@ -130,7 +133,7 @@ document.getElementById("searchButton").addEventListener("click", async () => {
 
   const global_rank = user.statistics.global_rank ?? "User is inactive.";
 
-    // 3. Render profile preview
+
     const profileLink = `https://osu.ppy.sh/users/${user.id}`;
 
     document.getElementById("profile").innerHTML = `
@@ -153,23 +156,23 @@ document.getElementById("searchButton").addEventListener("click", async () => {
       <p>Join Duration: ${wow_joindate(user.join_date, user.statistics.play_time)}</p>
     `;
 
-    // Save profile data
+   
     localStorage.setItem("profileData", JSON.stringify(user));
     localStorage.setItem("test", 3);
 
-    // 4. Fetch top plays
+  
     const top = await getUserTop(username);
 
-    // Save top play data
+
     localStorage.setItem("topPlayData", JSON.stringify(top));
 
-    // If no top plays
+
     if (!Array.isArray(top) || top.length === 0) {
       document.getElementById("topplays").innerHTML = "<p>No top plays found.</p>";
       return;
     }
 
-    // Render top play
+
     const best = top[0];
 
 
@@ -188,7 +191,7 @@ document.getElementById("searchButton").addEventListener("click", async () => {
     `;
 
   } catch (err) {
-    // 5. Catch server errors, JSON errors, network errors
+
     errorBox.textContent = "Something went wrong. Please try again.";
     console.error(err);
   }
@@ -199,10 +202,11 @@ const button = document.getElementById("searchButton");
 
 input.addEventListener("keydown", function(event) {
   if (event.key === "Enter") {
-    button.click();   // Pretend the user clicked the button
+    button.click();  
   }
 });
 
+// gets top plays of user
 async function getUserTop(username) {
   const token = await getToken();
 
@@ -226,14 +230,14 @@ const response = await fetch(`http://localhost:3000/user/${user}`, {
 });
 
 
-
+// save profile data to localStorage
 
 localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
 localStorage.setItem("profileData", JSON.stringify(user));
 
 
 
-
+// quests section
 if (loggedUser) {
   document.getElementById("loginButton").textContent = `Logged in as ${loggedUser}`;
 
@@ -258,7 +262,7 @@ if (loggedUser) {
 }
 
 
-
+// Quests button
 document.getElementById("viewQuestsButton").addEventListener("click", async () => {
       window.location.href = "quests.html"
 
@@ -267,6 +271,7 @@ document.getElementById("viewQuestsButton").addEventListener("click", async () =
 
 });
 
+// Debugging logs
 console.log(window.location.href);
 console.log(params.get("user"));
 console.log(localStorage.getItem("loggedUser"));
