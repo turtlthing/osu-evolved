@@ -1,0 +1,76 @@
+<html lang="en">
+<section style="height:20px;">
+  <!-- Just to show scrolling -->
+</section>
+<head>
+  <meta charset="UTF-8">
+  <title>osu! Profile Viewer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<header class="sticky-header">
+  <nav class="navbar">
+    <h1 class="logo">osu! Profile Viewer</h1>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a id="loginButton" class="osulink">Login with osu!</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+
+<body>
+  <div id="home">
+  <div id="searchbar">
+  <h1>osu! Profile Viewer</h1>
+
+    <!-- Search bar -->
+    <input type="text" id="searchInput" placeholder="Enter osu! username">
+    <button id="searchButton">Search</button>
+    <p id="errorMessage" style="color: red;"></p>
+    
+  </div>
+ 
+
+  <div id="logo">
+    <img src="assets/big brother.png" alt="osu! logo" width="200">
+  </div>
+  </div>
+  <!-- Where results will appear -->
+
+  <div id="profile-container">
+   <div id="profile">
+    <h1>Search for a name to view profile</h1>
+   </div>
+   <div id="topplay">
+    <h1>Search for a name to view top plays</h1>
+   </div>
+  </div>
+
+  <div id="quests">
+    <h1>Personal Quests</h1>
+    <p> Login to view your personal quests!</p>
+  </div>
+
+  <div id="bottombar">
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="loginbutton">Login</a></li>
+      </ul>
+     </nav>
+  </div>
+  
+
+
+
+  <script type="module" src="script.js">
+
+  </script>
+  
+</body>
+</html>

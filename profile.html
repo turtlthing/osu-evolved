@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>osu! Profile Viewer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="sticky-header">
+  <nav class="navbar">
+    <h1 class="logo">osu! Profile Viewer</h1>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a id="loginButton" class="osulink">Login with osu!</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+
+<div id="errorMessage" style="color:red;"></div>
+
+<div id="profile-container">
+
+  <div id="profilemain_a">
+    <h1>Search for a name to view profile</h1>
+  <div id="rankGraph"></div>
+
+  <div id="profilemain_b">
+    <h1>Search for a name to view profile</h1>
+  </div>
+  </div> 
+
+
+
+  <div id="topplay">
+    <h1>Search for a name to view profile</h1>
+  </div>
+
+</div>
+
+
+  <div id="topplays-container">
+    <div id="topplays">
+      <h1>Search for a name to view top plays</h1>
+    </div>
+    <div id="topplays_inflation">
+      <h1>Click on a play to view details</h1>
+    </div>
+  </div>
+  </div>
+
+<!-- Load script AFTER the elements exist -->
+<script src="profile.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,459 @@
+body {
+  background: #111;
+  color: #eee;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px 20px 0 20px;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #222;
+  padding: 10px 20px;
+}
+
+/* Layout */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  color: white;
+  margin: 0;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+#loginButton {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #ff66aa;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  vertical-align: middle;
+}
+#loginButton:hover {
+  background: #ff3388;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+#home {
+  display: flex;
+  gap: 20px;          /* space between boxes */
+  align-items: flex-start;
+}
+
+#searchbar {
+  width: 80%;       
+  height: 240px;
+  background: #1a1a1a;
+  padding: 80px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+#searchInput {
+  margin-top: 20px;
+  padding: 10px;
+  width: 250px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+#searchButton {
+  padding: 10px 15px;
+  background: #ff66aa;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+#searchButton:hover {
+  background: #ff4d99;
+}
+
+#logo {
+  align-items: center;
+  background: #1a1a1a;
+  padding: 50px;
+  border-radius: 10px;
+  width: 20%;
+  height: 300px;
+  margin-top: 20px;
+}
+
+#profile {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 40%;  
+  height: 600px;
+  max-width: 1000px;
+  margin-top: 20px;
+}
+
+#profile img {
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+#profile h2 {
+  margin: 0 0 10px 0;
+}
+
+#profile p {
+  margin: 5px 0;
+}
+
+.flag {
+  width: 90px;
+  height: 68px;
+  margin-left: 8px;
+  vertical-align: middle;
+  border-radius: 3px;
+}
+
+#profile-container {
+  display: flex;
+  gap: 20px;          /* space between boxes */
+  align-items: flex-start;
+}
+
+
+#topplays-container {
+  display: flex;
+  margin-top: 10px;
+  gap: 20px;          /* space between boxes */
+  align-items: flex-start;
+  width: 100%;
+  background: #111;
+}
+
+#topplays{
+  width: 60%;       /* your top plays box width */
+  max-height: fit-content;
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top : 20px;
+  width: 40%;
+  height: 900px;
+  overflow-y: auto;
+}
+
+#topplays_inflation{
+  width: 60%;       /* your top plays box width */
+  max-height: fit-content;
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+
+}
+
+#quests {
+  width: 98%;       
+     
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+#bottombar {
+  width: 1817px;       
+  height: 50px;     
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+}
+
+#profilemain_a{
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 50%;  
+  height: 600px;
+
+  margin-top: 20px;
+}
+
+#profilemain_b{
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 50%;  
+  height: 600px;
+
+  margin-top: 20px;
+}
+
+#quests-container{
+  background: #1a1a1a;
+  padding: 20px;
+  margin: 20px;
+  margin-left: -2px;
+  border-radius: 10px;
+
+
+
+  margin-top: 20px;
+}
+
+
+.inline-img, .inline-text {
+  display: inline-block;
+  vertical-align: top;
+}
+
+#topplay {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  width: 60%;  
+  height: 600px;
+  margin-top: 20px;
+}
+
+.rankGraphBox {
+  margin: 20px;
+  padding: 15px;
+  background: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+.rankGraphBox h2 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.rankGraphImg {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 8px;
+}
+
+.clickable {
+  cursor: pointer;
+  transition: 0.2s;
+  background: #111;
+  
+}
+
+.clickable:hover {
+  transform: scale(1.02);
+}
+
+div .play-details {
+  display:inline-block;
+  margin: 5px;
+  width: 22.785%;
+  background: #111;
+  padding: 5px;
+  border-radius: 5px;
+  height: 100%;
+}
+
+div .play-details_b {
+  display:inline-block;
+  margin: 5px;
+  width: 100%;
+  background: #111;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+div .play-details_c {
+  display:inline-block;
+  margin: 5px;
+  width: 20%;
+  background: #111;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#topplay_inflation h3 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+
+.play-content {
+
+  margin: 20px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  border-radius: 5px;
+}
+
+.questdetails {
+  width: 30%;
+}
+
+
+.quest-details {
+  display:inline-block;
+  margin: 50px;
+  width: 25%;
+  background: #111;
+  padding: 5px;
+  border-radius: 5px;
+  height: 60%;
+ }
+
+.quest-img {
+
+margin: 20px;
+}
+
+
+.quest-content-button {
+   
+
+  background-color: #424040;
+
+}
+
+
+.quest-content-button:hover {
+  
+  transform: scale(1.02);
+  background-color: #e4e1e1;
+
+}
+
+#testbutton {
+  padding: 10px 15px;
+  background: #ff66aa;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+
+#resetbutton {
+  padding: 10px 15px;
+  background: #da0707;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+#quests-daily {
+  display: flex;
+  gap: 20px;          /* space between boxes */
+  align-items: flex-start;
+  width: 100%;
+  background: #3b3b3b;
+  margin-bottom: 20px;
+}
+
+#quests-weekly {
+  display: flex;
+  gap: 20px;          /* space between boxes */
+  align-items: flex-start;
+  width: 100%;
+  background: #3b3b3b;
+  margin-bottom: 20px;
+}
+
+#quests-monthly {
+  display: flex;
+  gap: 20px;          /* space between boxes */
+  align-items: flex-start;
+  width: 100%;
+  background: #3b3b3b;
+  margin-bottom: 20px;
+}
+
+.quest-refresh {
+  margin: 0 0 10px;
+  text-align: center;
+  color: #ddd;
+}
+
+.quest-card {
+  box-sizing: border-box;
+}
+
+.quest-complete-button {
+  padding: 10px 15px;
+  background: #ff66aa;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.quest-complete-button:hover:not(:disabled) {
+  background: #ff3388;
+}
+
+.quest-complete-button:disabled {
+  background: #555;
+  color: #ddd;
+  cursor: default;
+}
+
+.quests {
+  width: 33.33%;
+  text-align: center;
+  padding: 20px;
+}
+
+.full-width {
+  width: 100%;
+  height: 100px;
+  margin: 40px;
+  text-align: left;
+  padding: 20px;
+
+}
+
+#viewquestsButton {
+  padding: 10px 15px;
+  background: #ff66aa;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  height: 100px;
+}
+
+.button-text {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}

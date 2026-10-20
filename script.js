@@ -1,0 +1,272 @@
+
+
+const params = new URLSearchParams(window.location.search);
+const loggedUser = params.get("user");
+const user = JSON.parse(localStorage.getItem("osuUser"));
+const token = localStorage.getItem("osuToken");
+
+
+document.getElementById("loginButton").addEventListener("click", () => {
+  const params = new URLSearchParams({
+    client_id: 65956,
+    redirect_uri: "http://localhost:3000/callback",
+    response_type: "code",
+    scope: "identify"
+  });
+
+  window.location.href = `https://osu.ppy.sh/oauth/authorize?${params.toString()}`;
+});
+
+async function getToken() {
+  const response = await fetch("http://localhost:3000/token", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      client_id: 65956,
+      client_secret: "wZI0OksPUV9BRzPGW8FSCzVC19DA5Fu1pj9rGdkT",
+      grant_type: "client_credentials",
+      scope: "public"
+    })
+  });
+
+  return await response.json();
+}
+
+// 2. define getUserByUsername SECOND
+async function getUserByUsername(username) {
+  const token = await getToken();
+
+  const response = await fetch(
+    `http://localhost:3000/user/${encodeURIComponent(username)}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`
+      }
+    }
+  );
+
+  return await response.json();
+}
+
+
+function accuracy_fixed(accuracy) {
+  return (accuracy * 100).toFixed(2) + " %";
+}
+function wow_playtime(playtime) {
+  const hours = Math.floor(playtime / 3600).toFixed(2);
+  const days = (hours / 24).toFixed(2);
+
+  let statement = "";
+
+  if (days < 1) {
+    statement = "wow, you have played less than a day!";
+  } else if (days < 7) {
+    statement = "wow, you have played less than a week!";
+  } else if (days < 30) {
+    statement = "wow, you have a decent playtime!";
+  } else {
+    statement = "wow, you have a lot of playtime! get off the game and go outside!";
+  }
+
+  return days + " days: " + statement;
+}
+
+function wow_joindate(joinDate, days) {
+  const join = new Date(joinDate);
+  const now = new Date();
+  const diffTime = Math.abs(now - join);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  let statement = "";
+
+  if (diffDays < 30) {
+    statement = "wow, you joined not long ago!";
+  } else if (diffDays < 365) {
+    statement = "wow, you've been with us for a bit!";
+  } else if (diffDays < 730) {
+    statement = "wow, you're getting the hang of it!";
+  } else if (diffDays < 3500) {
+    statement = "wow, you're a true legend!";
+  } else {
+    statement = "wow, uncle you need to get a life!";
+  }
+
+  return diffDays + " days: " + statement;
+}
+
+// 3. search button LAST
+document.getElementById("searchButton").addEventListener("click", async () => {
+
+  const username = document.getElementById("searchInput").value.trim();
+  const errorBox = document.getElementById("errorMessage");
+
+
+
+  // Clear old errors
+  errorBox.textContent = "";
+
+  // 1. Empty input
+  if (!username) {
+    errorBox.textContent = "Please enter a valid username.";
+    return;
+  }
+
+  try {
+    // 2. Fetch profile
+    const user = await getUserByUsername(username);
+    console.log("Fetched user:", user);
+
+    // If API returns HTML instead of JSON
+    if (!user || typeof user !== "object") {
+      errorBox.textContent = "Unexpected response from server.";
+      return;
+    }
+
+    // If user not found
+    if (user.error || user.status === 404) {
+      errorBox.textContent = "User not found.";
+      return;
+    }
+
+  const global_rank = user.statistics.global_rank ?? "User is inactive.";
+
+    // 3. Render profile preview
+    const profileLink = `https://osu.ppy.sh/users/${user.id}`;
+
+    document.getElementById("profile").innerHTML = `
+      <h2>
+        <a href="profile.html" onclick="saveProfile()">${user.username}</a>
+        <img src="https://flagsapi.com/${user.country.code}/flat/64.png" class="flag">
+        <a href="${profileLink}" target="_blank" class="osulink">View osu! Profile</a>
+      </h2>
+
+      <img src="${user.avatar_url}" width="200">
+      <p>Country: ${user.country.name}</p>
+      <p>PP: ${user.statistics.pp}</p>
+      <p>Global Rank: ${global_rank}</p>
+      <p>Play Count: ${user.statistics.play_count}</p>
+      <p>Accuracy: ${accuracy_fixed(user.statistics.accuracy)}</p>
+      <p>Max Combo: ${user.statistics.maximum_combo}</p>
+      <p>Level: ${user.statistics.level.current}</p>
+      <p>Join Date: ${new Date(user.join_date).toLocaleDateString()}</p>
+      <p>Play Time: ${wow_playtime(user.statistics.play_time)}</p>
+      <p>Join Duration: ${wow_joindate(user.join_date, user.statistics.play_time)}</p>
+    `;
+
+    // Save profile data
+    localStorage.setItem("profileData", JSON.stringify(user));
+    localStorage.setItem("test", 3);
+
+    // 4. Fetch top plays
+    const top = await getUserTop(username);
+
+    // Save top play data
+    localStorage.setItem("topPlayData", JSON.stringify(top));
+
+    // If no top plays
+    if (!Array.isArray(top) || top.length === 0) {
+      document.getElementById("topplays").innerHTML = "<p>No top plays found.</p>";
+      return;
+    }
+
+    // Render top play
+    const best = top[0];
+
+
+
+    document.getElementById("topplay").innerHTML = `
+      <h2>Top Play</h2>
+      <div class="play">
+        <img src="${best.beatmapset.covers.cover}" class="thumbnail">
+        <h3>${best.beatmapset.title} [${best.beatmap.version}]</h3>
+        <p><strong>PP:</strong> ${best.pp}</p>
+        <p><strong>Accuracy:</strong> ${accuracy_fixed(best.accuracy)}</p>
+        <p><strong>Mods:</strong> ${best.mods.join(", ") || "None"}</p>
+        <p><strong>Combo:</strong> ${best.max_combo}x</p>
+        <p><strong>Rank:</strong> ${best.rank}</p>
+      </div>
+    `;
+
+  } catch (err) {
+    // 5. Catch server errors, JSON errors, network errors
+    errorBox.textContent = "Something went wrong. Please try again.";
+    console.error(err);
+  }
+});
+
+const input = document.getElementById("searchInput");
+const button = document.getElementById("searchButton");
+
+input.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    button.click();   // Pretend the user clicked the button
+  }
+});
+
+async function getUserTop(username) {
+  const token = await getToken();
+
+  const response = await fetch(
+    `http://localhost:3000/user/${encodeURIComponent(username)}/top`,
+    {
+      headers: {
+        Authorization: `Bearer ${token.access_token}`
+      }
+    }
+  );
+
+  return await response.json();
+}
+
+
+const response = await fetch(`http://localhost:3000/user/${user}`, {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+});
+
+
+
+
+localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
+localStorage.setItem("profileData", JSON.stringify(user));
+
+
+
+
+if (loggedUser) {
+  document.getElementById("loginButton").textContent = `Logged in as ${loggedUser}`;
+
+
+  document.getElementById("quests").innerHTML = `
+      <h1> Personal Quests</h1>
+      <p> Welcome, ${loggedUser}! Click here to view your personal quests:</p>
+
+      <button id="viewQuestsButton"> <span class="button-text"> <a href="quests.html">View Quests</a></span> </button>
+
+
+
+
+
+
+
+
+
+
+
+    `;
+}
+
+
+
+document.getElementById("searchButton").addEventListener("click", async () => {
+      window.location.href = "quests.html"
+
+
+
+
+});
+
+console.log(window.location.href);
+console.log(params.get("user"));
+console.log(localStorage.getItem("loggedUser"));
