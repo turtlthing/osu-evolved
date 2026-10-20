@@ -242,7 +242,7 @@ if (loggedUser) {
       <h1> Personal Quests</h1>
       <p> Welcome, ${loggedUser}! Click here to view your personal quests:</p>
 
-      <button id="viewQuestsButton"> <span class="button-text"> <a href="quests.html">View Quests</a></span> </button>
+      <button id="viewQuestsButton"> <span class="button-text"> View Quests</a></span> </button>
 
 
 
@@ -259,7 +259,7 @@ if (loggedUser) {
 
 
 
-document.getElementById("searchButton").addEventListener("click", async () => {
+document.getElementById("viewQuestsButton").addEventListener("click", async () => {
       window.location.href = "quests.html"
 
 
