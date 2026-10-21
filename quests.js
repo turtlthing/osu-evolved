@@ -96,6 +96,18 @@ function getQuestProgress(state) {
   };
 }
 
+function renderQuestSectionStatus(type, quests) {
+  const status = document.getElementById(`check${type}`);
+  if (!status) {
+    throw new Error(`Missing quest section status: check${type}`);
+  }
+
+  const completedCount = quests.filter(quest => quest.completed).length;
+  const allCompleted = quests.length > 0 && completedCount === quests.length;
+  status.textContent = allCompleted ? `✓ Complete (${completedCount}/${quests.length})` : `${completedCount}/${quests.length} complete`;
+  status.classList.toggle("is-complete", allCompleted);
+}
+
 function loadAndRenderQuests(user) {
   const storageKey = getQuestStorageKey(user);
   const periods = getCalendarPeriods();
@@ -158,6 +170,8 @@ function loadAndRenderQuests(user) {
         }
       });
     }
+
+    renderQuestSectionStatus(type, savedQuests[type].quests);
   }
 
   savedQuests.progress = getQuestProgress(savedQuests);
@@ -430,6 +444,12 @@ async function getUserByUsername(username) {
 
   return await response.json();
 }
+
+// Home button
+document.getElementById("homebutton").addEventListener("click", async () => {
+      window.location.href = "index.html"
+
+});
 
 if (loggedUser) {
   loadProfile();
