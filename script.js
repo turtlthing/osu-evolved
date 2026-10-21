@@ -1,5 +1,3 @@
-
-
 const params = new URLSearchParams(window.location.search);
 const loggedUser = params.get("user");
 const user = JSON.parse(localStorage.getItem("osuUser"));
@@ -104,13 +102,9 @@ document.getElementById("searchButton").addEventListener("click", async () => {
 
   const username = document.getElementById("searchInput").value.trim();
   const errorBox = document.getElementById("errorMessage");
-
-
-
-
+  
   errorBox.textContent = "";
 
- 
   if (!username) {
     errorBox.textContent = "Please enter a valid username.";
     return;
@@ -180,11 +174,8 @@ document.getElementById("profilebutton").addEventListener("click", async () => {
       document.getElementById("topplays").innerHTML = "<p>No top plays found.</p>";
       return;
     }
-
-
+    
     const best = top[0];
-
-
 
     document.getElementById("topplay").innerHTML = `
       <h2>Top Play</h2>
@@ -245,7 +236,6 @@ localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
 localStorage.setItem("profileData", JSON.stringify(user));
 
 
-
 // quests section
 if (loggedUser) {
   document.getElementById("loginButton").textContent = `Logged in as ${loggedUser}`;
@@ -256,17 +246,6 @@ if (loggedUser) {
       <p> Welcome, ${loggedUser}! Click here to view your personal quests:</p>
 
       <button id="viewQuestsButton"> <span class="button-text"> View Quests</a></span> </button>
-
-
-
-
-
-
-
-
-
-
-
     `;
 }
 
@@ -282,8 +261,6 @@ document.getElementById("homebutton").addEventListener("click", async () => {
       window.location.href = "index.html"
 
 });
-
-
 
 // Debugging logs
 console.log(window.location.href);
