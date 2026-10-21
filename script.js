@@ -17,6 +17,8 @@ document.getElementById("loginButton").addEventListener("click", () => {
   window.location.href = `https://osu.ppy.sh/oauth/authorize?${params.toString()}`;
 });
 
+
+// access to osu api
 async function getToken() {
   const response = await fetch("http://localhost:3000/token", {
     method: "POST",
@@ -138,7 +140,8 @@ document.getElementById("searchButton").addEventListener("click", async () => {
 
     document.getElementById("profile").innerHTML = `
       <h2>
-        <a href="profile.html" onclick="saveProfile()">${user.username}</a>
+        <a href="profile.html" onclick="saveProfile()">${user.username} <span class="small"> click to view expanded profile </span></a>
+        <button id="profilebutton"> <h1> ${user.username} </h1> </button>
         <img src="https://flagsapi.com/${user.country.code}/flat/64.png" class="flag">
         <a href="${profileLink}" target="_blank" class="osulink">View osu! Profile</a>
       </h2>
@@ -159,6 +162,12 @@ document.getElementById("searchButton").addEventListener("click", async () => {
    
     localStorage.setItem("profileData", JSON.stringify(user));
     localStorage.setItem("test", 3);
+
+    // Profile button
+document.getElementById("profilebutton").addEventListener("click", async () => {
+      window.location.href = "profile.html"
+
+});
 
   
     const top = await getUserTop(username);
@@ -266,10 +275,15 @@ if (loggedUser) {
 document.getElementById("viewQuestsButton").addEventListener("click", async () => {
       window.location.href = "quests.html"
 
+});
 
-
+// Home button
+document.getElementById("homebutton").addEventListener("click", async () => {
+      window.location.href = "index.html"
 
 });
+
+
 
 // Debugging logs
 console.log(window.location.href);
