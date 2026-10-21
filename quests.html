@@ -10,13 +10,12 @@
 
 <header class="sticky-header">
   <nav class="navbar">
-    <h1 class="logo">osu!Evolved</h1>
+    <button id="homebutton">osu!Evolved</button>
 
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
 
 
-      <li><a href="about.html">About</a></li>
+
       <li><a id="loginButton" class="osulink">Login with osu!</a></li>
       
     </ul>
@@ -52,7 +51,7 @@
 
 
   <span class="quests">
-        <h1><span class="full-width">Daily Quests</span></h1>
+        <h1><span class="full-width">Daily Quests</span> <span id="checkdaily" class="quest-section-status" role="status" aria-live="polite"></span></h1>
   <p class="quest-refresh" id="daily-refresh"></p>
 
   <div id="quests-daily">
@@ -62,7 +61,7 @@
   
   </div>
 
-        <h1><span class="full-width">Weekly Quests</span></h1>
+        <h1><span class="full-width">Weekly Quests</span> <span id="checkweekly" class="quest-section-status" role="status" aria-live="polite"></span></h1>
   <p class="quest-refresh" id="weekly-refresh"></p>
 
   <div id="quests-weekly">
@@ -71,7 +70,7 @@
     <div id="weekly-quest-3" class="quests quest-card">Weekly Quest 3</div>
   </div>
 
-  <h1><span class="full-width">Monthly Quests</span></h1>
+  <h1><span class="full-width">Monthly Quests</span> <span id="checkmonthly" class="quest-section-status" role="status" aria-live="polite"></span></h1>
   <p class="quest-refresh" id="monthly-refresh"></p>
 
   <div id="quests-monthly">
