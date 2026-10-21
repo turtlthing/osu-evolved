@@ -33,19 +33,15 @@ async function showDetails(play) {
   if (play.score === 0) {
     var score = "Score was submitted on osu!lazer, which does not support score submission yet.";
 
-
   }
 
   else { 
    var score = (play.score)
   }
 
-
-
-  document.getElementById("topplays_inflation").innerHTML = `
-
   
-
+  document.getElementById("topplays_inflation").innerHTML = `
+  
     <img src="${play.beatmapset.covers.cover}" width="100%">
     <h2>${play.beatmapset.title} [${play.beatmap.version}]</h2>
 
@@ -77,10 +73,9 @@ async function showDetails(play) {
     <div class="play-details">
     <p> Stars: ${play.beatmap.difficulty_rating}</p>
     </div>
-
+    
     </div>
-
-
+    
     <div>
 
     <div class="play-details_d">
@@ -101,37 +96,20 @@ async function showDetails(play) {
 
     </div>
 
-
-
     <div> 
     <div class="play-details_b">
     <h3>CS: ${play.beatmap.cs} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; AR: ${play.beatmap.ar}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; OD: ${play.beatmap.accuracy}  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; HP: ${play.beatmap.drain}</h3>
     </div>
 
-    
-   
     <div class="play-details_b">
     <h3>Date Submitted: ${new Date(play.created_at).toLocaleDateString()} </h3>
     </div>
-
-
+    
     <div class="play-details_c">
     <h3>Rank: ${play.rank} </h3>
     </div>
-
-
-
     </div>
-
-
-    
-
-    
     </div>
-
-
-
-
   `;
 }
 
@@ -149,8 +127,6 @@ if (!user) {
     <p>Ranked Score: ${user.statistics.ranked_score}</p>
     <p>Play Time: ${wow_playtime(user.statistics.play_time)}</p>
     <p>Join Date: ${new Date(user.join_date).toLocaleDateString()}</p>
-
-
   `;
 }
 
@@ -165,7 +141,6 @@ if (Array.isArray(topplay) && topplay.length > 0) {
     <p>Score: ${best.score}</p>
     <p>Accuracy: ${accuracy_fixed(best.accuracy)}</p>
     </span>
-    
   `;
 }
 
@@ -174,9 +149,6 @@ if (Array.isArray(topplay) && topplay.length > 0) {
   let html = "<h2>Top Plays</h2>";
 
   topplay.forEach((play, index) => {
-
-    
-
     html += `
       <div class="play clickable" data-index="${index}">
         <div class="play-content">
@@ -188,9 +160,7 @@ if (Array.isArray(topplay) && topplay.length > 0) {
         <p>Score: ${play.score} [${accuracy_fixed(play.accuracy)}] Max Combo: ${play.max_combo}</p>
         <p>Date Submitted: ${new Date(play.created_at).toLocaleDateString()} </p>   
         </div>
-        
       </div>
-
     `;
   });
 
@@ -227,5 +197,4 @@ const params = new URLSearchParams(window.location.search);
 // Home button
 document.getElementById("homebutton").addEventListener("click", async () => {
       window.location.href = "index.html"
-
 });
