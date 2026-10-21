@@ -36,6 +36,10 @@ async function showDetails(play) {
 
   }
 
+  else { 
+   var score = (play.score)
+  }
+
 
 
   document.getElementById("topplays_inflation").innerHTML = `
@@ -79,8 +83,8 @@ async function showDetails(play) {
 
     <div>
 
-    <div class="play-details">
-    <h2> Score: ${score}</h2>
+    <div class="play-details_d">
+    <h2> Score: <span class="small">  ${score} </span></h2>
     </div>
 
     <div class="play-details">
@@ -123,19 +127,11 @@ async function showDetails(play) {
     
 
     
-
-    <p>Rank: ${play.rank}</p>
-    <p>Max Combo: ${play.max_combo}</p>
-    <p>Mods: ${play.mods.join(", ") || "None"}</p>
-    <p>Date Submitted: ${new Date(play.created_at).toLocaleDateString()}</p>
     </div>
 
 
 
 
-    <p>PP: ${play.pp}</p>
-    <p>Score: ${play.score}</p>
-    <p>Accuracy: ${accuracy_fixed(play.accuracy)}</p>
   `;
 }
 
@@ -190,7 +186,7 @@ if (Array.isArray(topplay) && topplay.length > 0) {
         <p>PP: ${play.pp} Rank: ${play.rank}</p>
         </span>
         <p>Score: ${play.score} [${accuracy_fixed(play.accuracy)}] Max Combo: ${play.max_combo}</p>
-        <p> Date Submitted: ${play.created_at} </p>
+        <p>Date Submitted: ${new Date(play.created_at).toLocaleDateString()} </p>   
         </div>
         
       </div>
@@ -212,21 +208,6 @@ document.getElementById("topplays").addEventListener("click", (e) => {
 });
 
 
-async function getPPBreakdown(play) {
-    const mapId = play.beatmap.id;
-    const acc = (play.accuracy * 100).toFixed(2);
-    const mods = play.mods.join("");
-
-    const url = `https://osekai.net/api/pp?map=${mapId}&acc=${acc}&mods=${mods}`;
-
-    try {
-        const res = await fetch(url);
-        return await res.json();
-    } catch (err) {
-        console.error("Osekai error:", err);
-        return null;
-    }
-}
 
 document.getElementById("loginButton").addEventListener("click", () => {
   const params = new URLSearchParams({
@@ -243,3 +224,8 @@ document.getElementById("loginButton").addEventListener("click", () => {
 const params = new URLSearchParams(window.location.search);
 
 
+// Home button
+document.getElementById("homebutton").addEventListener("click", async () => {
+      window.location.href = "index.html"
+
+});
