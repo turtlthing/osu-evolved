@@ -16,7 +16,7 @@ document.getElementById("loginButton").addEventListener("click", () => {
 });
 
 
-// access to osu api
+// access to osu! api
 async function getToken() {
   const response = await fetch("http://localhost:3000/token", {
     method: "POST",
@@ -132,14 +132,17 @@ document.getElementById("searchButton").addEventListener("click", async () => {
 
     const profileLink = `https://osu.ppy.sh/users/${user.id}`;
 
+// top row: button flag and profile link
+// details: avatar, country, pp, rank, playcount, accuracy, max combo, level, join date, play time, join duration
     document.getElementById("profile").innerHTML = `
+
       <h2>
-        <a href="profile.html" onclick="saveProfile()">${user.username} <span class="small"> click to view expanded profile </span></a>
+
         <button id="profilebutton"> <h1> ${user.username} </h1> </button>
         <img src="https://flagsapi.com/${user.country.code}/flat/64.png" class="flag">
         <a href="${profileLink}" target="_blank" class="osulink">View osu! Profile</a>
       </h2>
-
+      
       <img src="${user.avatar_url}" width="200">
       <p>Country: ${user.country.name}</p>
       <p>PP: ${user.statistics.pp}</p>
@@ -153,7 +156,7 @@ document.getElementById("searchButton").addEventListener("click", async () => {
       <p>Join Duration: ${wow_joindate(user.join_date, user.statistics.play_time)}</p>
     `;
 
-   
+    // save profile data, test transfer of data betwee
     localStorage.setItem("profileData", JSON.stringify(user));
     localStorage.setItem("test", 3);
 
@@ -163,7 +166,7 @@ document.getElementById("profilebutton").addEventListener("click", async () => {
 
 });
 
-  
+  // show top play
     const top = await getUserTop(username);
 
 
@@ -197,6 +200,8 @@ document.getElementById("profilebutton").addEventListener("click", async () => {
   }
 });
 
+
+// search button
 const input = document.getElementById("searchInput");
 const button = document.getElementById("searchButton");
 
