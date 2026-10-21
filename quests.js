@@ -15,9 +15,7 @@ function calcQuestLevel(experience) {
   if (experience < 100) {
     return 1;
   }
-
   return Math.floor(experience / 100);
-
 }
 
 const questPools = {
@@ -336,36 +334,14 @@ async function loadProfile() {
     `;
 
     renderQuestSummary(loggedUser);
-
-
-
-
-
-
-
 }
 
-
-  
-
-
-
-
-  
-  
-  
   catch (err) {
 
     errorBox.textContent = "Something went wrong. Please try again.";
     console.error(err);
   }
-
-  
 }
-
-
-
-
 
 function accuracy_fixed(accuracy) {
   return (accuracy * 100).toFixed(2) + " %";
@@ -427,9 +403,6 @@ async function getToken() {
   return await response.json();
 }
 
-
-
-
 async function getUserByUsername(username) {
   const token = await getToken();
 
@@ -445,10 +418,10 @@ async function getUserByUsername(username) {
   return await response.json();
 }
 
+
 // Home button
 document.getElementById("homebutton").addEventListener("click", async () => {
       window.location.href = "index.html"
-
 });
 
 if (loggedUser) {
